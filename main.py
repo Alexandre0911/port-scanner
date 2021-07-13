@@ -4,7 +4,7 @@ from queue import Queue
 
 
 
-target = str(input('IP Address: ')).lower()
+target = str(input('Target IP Address: ')).lower()
 if target == 'localhost':
     target = '192.168.1.1'
 else:
@@ -16,15 +16,22 @@ open_ports = []
 
 
 print('''\nScan Types:
-[1] Simple Scan     ->      Port 1 to Port 1024)
-[2] Advanced Scan   ->      Port 1 to Port 65536''')
+[1] Simple Scan     ->      Port 1 to Port 1024
+[2] Advanced Scan   ->      Port 1 to Port 65536
+[3] Custom Scan     ->      Custom Port Range''')
 
-ScanType = int(input('\nScan Type (1 or 2): '))
+ScanType = int(input('\nScan Type (1 ; 2 ; 3): '))
 portnumber = 0
 if ScanType == 1:
     portnumber = 1024
+    port_list = range(1, portnumber)
 elif ScanType == 2:
     portnumber = 65536
+    port_list = range(1, portnumber)
+elif ScanType == 3:
+    min_port = int(input('Enter Minimum Port >>> '))
+    max_port = int(input('Enter Maximum Port >>> '))
+    port_list = range(min_port, max_port+1)
 
 
 def portscan(port):
@@ -42,13 +49,14 @@ def fill_queue(port_list):
 def worker():
     while not queue.empty():
         port = queue.get()
-        if portscan(port):
-            print('Port {} is open!'.format(port))
+        if portscan(port) == False:
+            print('\n\033[31mPort {} is closed!\033[m'.format(port))
+        elif portscan(port) == True:
+            print('\n\033[32mPort {} is open!\033[m'.format(port))
             open_ports.append(port)
 
 
 
-port_list = range(1, portnumber)
 fill_queue(port_list)
 
 thread_list = []
@@ -70,7 +78,7 @@ for thread in thread_list:
 
 
 
-print('Open ports are: {}'.format(open_ports))
+print('\nOpen ports are: \033[34m{}\033[m'.format(open_ports))
 
 
 
