@@ -58,7 +58,7 @@ Alexandre0911
 
 # PT DESCRIPTION:
 
-Este port scanner vai fazer um Scan TCP (Scan UDP vai ser adicionado no futuro) num IP desejado, tudo o que tens de fazer é corre o programa, introduzir o IP e escolher entre 2 opções de alcance de portas predefinidas ou podes sempre escolher a opção para o teu alcance desejado.
+Este port scanner vai fazer um Scan TCP (Scan UDP vai ser adicionado no futuro) num IP desejado, tudo o que tens de fazer é correr o programa, introduzir o IP e escolher entre 2 opções de alcance de portas predefinidas ou podes sempre escolher a opção para o teu alcance desejado.
 O programa cria um ficheiro "ports.txt" com as portas abertas no IP introduzido pelo utilizador.
 
 
